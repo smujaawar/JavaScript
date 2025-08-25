@@ -271,3 +271,95 @@
 //    → `[900, 540]`
 // 3. **Reduce** → Adds values:
 //    → `1440`
+
+// ************map(), filter(), reduce() difference ****************
+
+// **`map()`, `forEach()`, and `reduce()`** are all **Higher-Order Functions** used to iterate over arrays in JavaScript, but they differ in **purpose, return value, and use cases**. Let’s break it down in depth:
+
+// ---
+
+// ##  **1. `forEach()`**
+
+// * **Purpose**: To iterate over an array and perform an action on each element.
+// * **Return Value**: **`undefined`** (it doesn’t create a new array).
+// * **When to Use**: When you only need to perform side effects (like logging, updating UI) and **don’t need a new array**.
+
+// ### **Example**
+
+// ```js
+// const arr = [1, 2, 3];
+// arr.forEach(num => console.log(num * 2)); // 2, 4, 6
+// console.log(arr); // [1, 2, 3] (original array unchanged)
+// ```
+
+// ---
+
+// ##  **2. `map()`**
+
+// * **Purpose**: To transform each element of the array and **return a new array**.
+// * **Return Value**: A **new array** of the same length as the original.
+// * **When to Use**: When you need to create a new array after applying some operation on each element.
+
+// ### **Example**
+
+// ```js
+// const arr = [1, 2, 3];
+// const doubled = arr.map(num => num * 2);
+// console.log(doubled); // [2, 4, 6]
+// ```
+
+// ---
+
+// ##  **3. `reduce()`**
+
+// * **Purpose**: To **reduce** all array elements to a **single value** (sum, product, object, etc.).
+// * **Return Value**: A **single value** (number, object, string, etc.).
+// * **When to Use**: When you need aggregation (sum, average, merge, flatten arrays).
+
+// ### **Example**
+
+// ```js
+// const arr = [1, 2, 3];
+// const sum = arr.reduce((acc, num) => acc + num, 0);
+// console.log(sum); // 6
+// ```
+
+// ---
+
+// ##  **Key Differences Table**
+
+// | Feature        | `forEach()`              | `map()`                     | `reduce()`                   |
+// | -------------- | ------------------------ | --------------------------- | ---------------------------- |
+// | **Purpose**    | Iterate for side effects | Transform array → new array | Reduce array → single value  |
+// | **Return**     | `undefined`              | New array                   | Single value (any type)      |
+// | **Chainable?** |  No                     |  Yes                       |  Yes                        |
+// | **Common Use** | Logging, DOM updates     | Modify each element         | Sum, average, flatten arrays |
+
+// ---
+
+// ##  **Real Example: Difference in Action**
+
+// ```js
+// const nums = [1, 2, 3, 4];
+
+// // forEach → just logs, no return
+// nums.forEach(n => console.log(n * 2)); // 2, 4, 6, 8
+
+// // map → creates a new array
+// const doubled = nums.map(n => n * 2);
+// console.log(doubled); // [2, 4, 6, 8]
+
+// // reduce → sums all values
+// const sum = nums.reduce((acc, n) => acc + n, 0);
+// console.log(sum); // 10
+// ```
+
+// ---
+
+// ##  **Interview Tip**
+
+// * If you need a **new array** → use **`map()`**.
+// * If you just need to **iterate** → use **`forEach()`**.
+// * If you need **one final value** → use **`reduce()`**.
+
+// ---
