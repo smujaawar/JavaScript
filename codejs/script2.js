@@ -126,64 +126,64 @@
 //   .then(() => processData().then(() => storeData()))
 //   .catch();
 
-function fetchData() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let fetch = true;
+// function fetchData() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       let fetch = true;
 
-      if (fetch) {
-        resolve("fetch the data");
-      } else {
-        reject("fetch failed");
-      }
-    }, 1000);
-  });
-}
+//       if (fetch) {
+//         resolve("fetch the data");
+//       } else {
+//         reject("fetch failed");
+//       }
+//     }, 1000);
+//   });
+// }
 
-function convertData() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let convert = true;
-      if (convert) {
-        resolve("data converted");
-      } else {
-        reject("conversion failed");
-      }
-    }, 1000);
-  });
-}
+// function convertData() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       let convert = true;
+//       if (convert) {
+//         resolve("data converted");
+//       } else {
+//         reject("conversion failed");
+//       }
+//     }, 1000);
+//   });
+// }
 
-function displayData() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let display = false;
-      if (display) {
-        resolve("Display the data");
-      } else {
-        reject("diplay failed");
-      }
-    }, 1000);
-  });
-}
+// function displayData() {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       let display = false;
+//       if (display) {
+//         resolve("Display the data");
+//       } else {
+//         reject("diplay failed");
+//       }
+//     }, 1000);
+//   });
+// }
 
-fetchData()
-  .then((message) => {
-    console.log(message);
-    return convertData();
-  })
-  .then((message) => {
-    console.log(message);
-    return displayData();
-  })
-  .then((message) => {
-    console.log(message);
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-  .finally(() => {
-    console.log("Finally executed");
-  });
+// fetchData()
+//   .then((message) => {
+//     console.log(message);
+//     return convertData();
+//   })
+//   .then((message) => {
+//     console.log(message);
+//     return displayData();
+//   })
+//   .then((message) => {
+//     console.log(message);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   })
+//   .finally(() => {
+//     console.log("Finally executed");
+//   });
 
 //Destructuring?
 
@@ -260,3 +260,138 @@ fetchData()
 //settimeout
 //start
 //end
+
+// **********************Closures*******************
+// function outer() {
+//   let a = 10;
+//   function inner() {
+//     let b = 10;
+//     const sum = a + b;
+//     console.log(sum);
+//   }
+//   return inner;
+// }
+// const fun = outer();
+// fun();
+
+// ***********this keyword*****************
+// "use strict";
+// console.log(this);
+// // console.log(window);
+
+// function fun() {
+//   console.log(this);
+// }
+// fun();
+
+// let obj = {
+//   name: "dfgh",
+//   age: 20,
+//   city: "Bangalore",
+//   fun: function () {
+//     console.log(this.age);
+//   },
+// };
+
+// console.log(obj.age);
+
+// *******arrow function**********
+
+// let a = 40;
+// function outer() {
+//   let a = 10;
+//   const newFn = () => {
+//     console.log(this.a);
+//   };
+//   newFn();
+// }
+// outer();
+
+// **********************************
+
+// let c = 30;
+// function outer() {
+//   let a = 10;
+//   function inner() {
+//     let b = 20;
+//     console.log("inner fun", a); //?
+//     console.log(b);
+//     console.log(c);
+//   }
+//   return inner;
+// }
+// const store = outer();
+// store();
+
+// function outer() {
+//   let count = 1;
+//   function inner() {
+//     count++;
+//     console.log(count);
+//   }
+//   return inner;
+// }
+
+// const store = outer();
+// store();
+// store();
+// store();
+// store();
+// store();
+// store();
+
+// *************This in JS***************
+
+// alert("Hello");
+// confirm("submit form?");
+// prompt("enter your name");
+// "use strict";
+// console.log(this);
+
+// function fun() {
+//   console.log("inside the fun", this);
+// }
+// fun();
+
+// let obj = {
+//   name: "John",
+//   age: 20,
+//   city: "Bangalore",
+//   fun: function () {
+//     console.log("inside the object", this);
+//     console.log(this.city);
+//   },
+// };
+
+// obj.fun();
+
+// let name = "John";
+// const obj = {
+//   name: "Alice",
+//   greet: () => {
+//     console.log(this.name);
+//   },
+// };
+// obj.greet(); // undefined (because arrow takes this from global scope)
+
+// const obj = {
+//   name: "Alice",
+//   greet: function () {
+//     const arrow = () => console.log(this.name);
+//     arrow();
+//   },
+// };
+// obj.greet();
+
+// const obj = {
+//   name: "Alice",
+//   normalFn: function () {
+//     console.log("this is from normal fun", this.name);
+//   },
+//   arrowFn: () => {
+//     console.log("this is from arrow fun", this.name);
+//   },
+// };
+
+// obj.arrowFn();
+// obj.normalFn();

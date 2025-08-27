@@ -26,7 +26,7 @@
 // ### **1. Global Context**
 
 // * In the **browser**, `this` refers to the `window` object in non-strict mode.
-// * In **strict mode**, `this` is `undefined` in the global context.
+// * In **strict mode**, `this` is `undefined` in the global context. //verify?
 
 // **Example:**
 
@@ -77,6 +77,7 @@
 
 // * **Arrow functions do NOT have their own `this`.**
 // * They use `this` from their **lexical scope** (the surrounding context where they were defined).
+// this refers to the object that called the function, or in arrow functions, the this of the enclosing scope.
 
 // **Example:**
 
@@ -102,6 +103,85 @@
 // };
 // obj.greet(); // Alice (arrow inherits from greet()'s this)
 // ```
+
+// how is it global arrow function is inside object ???
+
+// That’s the tricky part! It **looks like** `arrowFn` is inside the object, but technically **it isn’t** in terms of lexical scope.
+
+// ---
+
+// ###  Why it’s not the object’s scope
+
+// When you write:
+
+// ```javascript
+// const obj = {
+//   name: "Alice",
+//   arrowFn: () => {
+//     console.log(this.name);
+//   }
+// };
+// ```
+
+// * The arrow function `() => { console.log(this.name); }` is **created when the object literal is being defined**.
+// * At that time, what is the **enclosing scope**?
+
+//   * It’s **not `obj`** (because `obj` isn’t fully created yet).
+//   * It’s the **surrounding function or global scope** where this object literal is declared.
+
+// ---
+
+// ###  So the chain is:
+
+// * Global scope (or the function where `obj` is defined) → `obj` literal → arrow function inside.
+// * But arrow functions **don’t care about object literals**, they only care about the lexical scope (the function or global context they were created in).
+
+// ---
+
+// ###  Quick demo to prove it:
+
+// ```javascript
+// console.log(this); // global or undefined in strict mode
+
+// const obj = {
+//   name: "Alice",
+//   arrowFn: () => console.log(this), // check what "this" is
+// };
+
+// obj.arrowFn();
+// ```
+
+// Output in browser (non-strict):
+
+// ```
+// Window {...}  // the global object
+// ```
+
+// Why? Because:
+
+// * The arrow function takes `this` from **where the object was created** (the global scope).
+// * It **does NOT change `this`** even if you call it as `obj.arrowFn()`.
+
+// ---
+
+//  **Normal function vs Arrow inside an object**
+
+// ```javascript
+// const obj = {
+//   name: "Alice",
+//   normalFn: function() { console.log(this.name); },
+//   arrowFn: () => { console.log(this.name); }
+// };
+
+// obj.normalFn(); // Alice  (this = obj)
+// obj.arrowFn();  // undefined  (this = global or undefined)
+// ```
+
+// ---
+
+//  **Rule**: Arrow functions **ignore the calling object**; they lock `this` from the **context where they were defined** (which is outside the object literal).
+
+// ---
 
 // ---
 
