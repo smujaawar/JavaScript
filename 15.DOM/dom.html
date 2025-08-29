@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script defer src="dom.js"></script>
+    <title>DOM Features Demo</title>
+    <style>
+      .highlight {
+        background-color: yellow;
+        font-weight: bold;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <h1 id="title">DOM Features Example</h1>
+
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+    <button id="addBtn">Add Name</button>
+
+    <ul id="nameList">
+      <li>Example Name</li>
+    </ul>
+
+    <div id="infoBox">Click any list item to highlight.</div>
+
+    <button id="removeBtn">Remove Last Name</button>
+    <script src="script.js"></script>
+  </body>
 </html>
